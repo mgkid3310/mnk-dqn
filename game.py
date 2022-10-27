@@ -23,12 +23,12 @@ class mnk_env(gym.Env):
 
     def check_result(self, action):
         turn = self.board[action]
-        x, y = action // self.shape[0], action % self.shape[0]
+        x, y = action // self.shape[1], action % self.shape[1]
         self.array = self.board.reshape(self.shape)
 
         done, winner = False, 0
         # print((x, y))
-        # print(self.array)
+        print(self.array)
 
         lists = [np.array([], dtype = np.int8)] * 4
         for i in range(1 - self.k, self.k):
@@ -38,7 +38,7 @@ class mnk_env(gym.Env):
             lists[3] = self.append_if_valid(lists[3], x + i, y - i)
 
         for list in lists:
-            # print(list)
+            print(list)
             i, n = 0, 0
             for i in range(len(list)):
                 if list[i] == turn:
@@ -49,7 +49,7 @@ class mnk_env(gym.Env):
                 else:
                     n = 0
 
-        # print((done, winner))
+        print((done, winner))
 
         return done, winner
 
@@ -72,10 +72,11 @@ class mnk_env(gym.Env):
         return np.where(self.board == 0)
 
 if __name__ == '__main__':
-    env = mnk_env(4, 4, 3)
+    env = mnk_env(4, 5, 3)
     env.step(1)
     env.step(3)
     env.step(4)
     env.step(6)
     env.step(7)
     env.step(9)
+    env.step(13)
