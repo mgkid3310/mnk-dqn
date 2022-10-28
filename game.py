@@ -8,18 +8,21 @@ class mnk_env(gym.Env):
         self.shape = m, n
         self.size = m * n
         self.k = k
-        self.turn = 1
-        self.done = False
 
         self.reset()
 
     def reset(self):
         self.board = np.zeros(self.size, dtype = np.int8)
         self.array = self.board.reshape(self.shape)
-        self.observation = np.zeros(self.size, dtype = np.int8)
 
-    def get_obs(self):
-        return self.board, self.turn
+        self.turn = 1
+        self.done = False
+
+    def get_obs(self, visualize = False):
+        if visualize:
+            return self.array, self.turn
+        else:
+            return self.board, self.turn
 
     def check_result(self, action):
         turn = self.board[action]
@@ -28,7 +31,7 @@ class mnk_env(gym.Env):
 
         done, winner = False, 0
         # print((x, y))
-        print(self.array)
+        # print(self.array)
 
         lists = [np.array([], dtype = np.int8)] * 4
         for i in range(1 - self.k, self.k):
@@ -38,7 +41,7 @@ class mnk_env(gym.Env):
             lists[3] = self.append_if_valid(lists[3], x + i, y - i)
 
         for list in lists:
-            print(list)
+            # print(list)
             i, n = 0, 0
             for i in range(len(list)):
                 if list[i] == turn:
@@ -49,7 +52,7 @@ class mnk_env(gym.Env):
                 else:
                     n = 0
 
-        print((done, winner))
+        # print((done, winner))
 
         return done, winner
 
@@ -59,24 +62,24 @@ class mnk_env(gym.Env):
 
         return list
 
-    def step(self, action):
+    def step(self, action, visualize = False):
         self.board[action] = self.turn
         self.done, winner = self.check_result(action)
         reward = self.turn * winner
 
         self.turn = -self.turn
 
-        return self.get_obs(), reward, self.done, None
+        return self.get_obs(visualize), reward, self.done, None
 
     def empty_spaces(self):
         return np.where(self.board == 0)
 
 if __name__ == '__main__':
     env = mnk_env(4, 5, 3)
-    env.step(1)
-    env.step(3)
-    env.step(4)
-    env.step(6)
-    env.step(7)
-    env.step(9)
-    env.step(13)
+    print(env.step(1, True))
+    print(env.step(3, True))
+    print(env.step(4, True))
+    print(env.step(6, True))
+    print(env.step(7, True))
+    print(env.step(9, True))
+    print(env.step(13, True))
