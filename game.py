@@ -42,7 +42,7 @@ class mnk_env(gym.Env):
 
         for list in lists:
             # print(list)
-            i, n = 0, 0
+            n = 0
             for i in range(len(list)):
                 if list[i] == turn:
                     n += 1
@@ -51,6 +51,9 @@ class mnk_env(gym.Env):
                         break
                 else:
                     n = 0
+
+            if done:
+                break
 
         # print((done, winner))
 
@@ -82,4 +85,6 @@ if __name__ == '__main__':
     print(env.step(6, True))
     print(env.step(7, True))
     print(env.step(9, True))
+    print(env.step(19, True))
+    print(env.step(16, True))
     print(env.step(13, True))
