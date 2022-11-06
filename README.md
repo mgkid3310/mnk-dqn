@@ -8,10 +8,10 @@ Members:
 길준호, 에리카 전자공학부, gjh625com@naver.com 
  
 Ⅰ. Proposal (Option A)    
-*Motivation: Why are you doing this?    
+    *Motivation: Why are you doing this?*    
 
 
-*What do you want to see at the end?    
+    +What do you want to see at the end?    
 
 II. Theoretical background    
 
