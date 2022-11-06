@@ -14,25 +14,25 @@ __Ⅰ. Proposal (Option A)__
 * What do you want to see at the end?   
 mnk-game에서 k가 1, 2, 3인 경우에 확실한 파훼법이 존재하는데, k=4인 경우에는 명백한 파훼법이 존재하지 않으므로 이 경우에 대해서 DQN(Deep Q-Network)를 이용해 최선의 전략을 제공할 수 있는 모델을 완성하는 것을 이번 프로젝트의 목적으로 한다.      
 
-__II. Theoretical background__
+__Ⅱ. Theoretical background__
  * 강화학습   
  * Q-Table (Q-Learning)
  * Neural Network
  * DQN (Deep Q-Network) 
 
-__III. Datasets__     
+__Ⅲ. Datasets__     
  * m, n, k = 5, 5, 4
         
-__IV. Methodology__
+__Ⅳ. Methodology__
  * input layer: m*n
  * dense 2*m*n relu
  * output m*n linear
  * tkinter
 
-__V. Evaluation & Analysis__      
+__Ⅴ. Evaluation & Analysis__      
 
-__VI. Related Work__
+__Ⅵ. Related Work__
  * https://ko.wikipedia.org/wiki/M,n,k-%EA%B2%8C%EC%9E%84
  * https://github.com/bruiseUneo/AI_X_DeepLearning
 
-__VII. Conclusion: Discussion__
+__Ⅶ. Conclusion: Discussion__
