@@ -9,7 +9,7 @@ __Members__:
  
 __Ⅰ. Proposal (Option A)__            
 * Motivation:    
-    a
+      a
     
 * What do you want to see at the end?    
 
