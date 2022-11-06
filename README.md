@@ -21,7 +21,7 @@ __II. Theoretical background__
  * DQN (Deep Q-Network) 
 
 __III. Datasets__     
- * m, n, k = 5, 5, 4
+ * m, n, k = 5, 5, 4    
 __IV. Methodology__
  * input layer: m*n
  * dense 2*m*n relu
