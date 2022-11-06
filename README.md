@@ -10,7 +10,6 @@ Members:
 Ⅰ. Proposal (Option A)    
     ●Motivation: Why are you doing this?    
 
-
     ●What do you want to see at the end?    
 
 II. Theoretical background    
