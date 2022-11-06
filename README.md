@@ -7,18 +7,20 @@ __Members__:
 오하은, 서울 컴퓨터소프트웨어학부, haeunoh.tech@gmail.com     
 길준호, 에리카 전자공학부, gjh625com@naver.com 
  
-Ⅰ. Proposal (Option A)            
-* Motivation: Why are you doing this?    
+__Ⅰ. Proposal (Option A)__            
+* Motivation: 
+    a
+    
 * What do you want to see at the end?    
 
-II. Theoretical background    
+__II. Theoretical background__    
 
-III. Datasets     
+__III. Datasets__     
 
-IV. Methodology     
+__IV. Methodology__     
 
-V. Evaluation & Analysis      
+__V. Evaluation & Analysis__      
 
-VI. Related Work    
+__VI. Related Work__    
 
-VII. Conclusion: Discussion
+__VII. Conclusion: Discussion__
