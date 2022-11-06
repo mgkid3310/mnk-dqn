@@ -23,3 +23,6 @@ VI. Related Work
 
 VII. Conclusion: Discussion    
 
+* 빨강
+  * 녹색
+    * 파랑
