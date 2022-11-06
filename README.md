@@ -8,10 +8,12 @@ __Members__:
 길준호, 에리카 전자공학부, gjh625com@naver.com 
  
 __Ⅰ. Proposal (Option A)__            
-* Motivation:    
-  a
+* Motivation: 
+a   
+  
     
-* What do you want to see at the end?    
+* What do you want to see at the end?   
+       
 
 __II. Theoretical background__    
 
