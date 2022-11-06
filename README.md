@@ -8,7 +8,7 @@ __Members__:
 길준호, 에리카 전자공학부, gjh625com@naver.com 
  
 __Ⅰ. Proposal (Option A)__            
-* Motivation: 
+* Motivation:    
     a
     
 * What do you want to see at the end?    
