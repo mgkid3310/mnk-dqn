@@ -1,7 +1,7 @@
-import gym
 import numpy as np
+import torch
 
-class mnk_env(gym.Env):
+class mnk_env():
     reward = (-1, 0, 1)
 
     def __init__(self, m = 3, n = 3, k = 3):
@@ -24,7 +24,13 @@ class mnk_env(gym.Env):
         else:
             return self.board, self.turn
 
+    def get_state(self):
+        return torch.tensor(np.array([self.board * self.turn]))
+
     def check_result(self, action):
+        if np.where(self.board == 0)[0].size == 0:
+            return True, 0
+
         turn = self.board[action]
         x, y = action // self.shape[1], action % self.shape[1]
         self.array = self.board.reshape(self.shape)
@@ -72,9 +78,9 @@ class mnk_env(gym.Env):
 
         self.turn = -self.turn
 
-        return self.get_obs(visualize), reward, self.done, None
+        return self.get_state(), reward, self.done, None
 
-    def empty_spaces(self):
+    def vaild_actions(self):
         return np.where(self.board == 0)
 
 if __name__ == '__main__':
