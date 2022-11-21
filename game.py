@@ -37,8 +37,6 @@ class mnk_env():
         self.array = self.board.reshape(self.shape)
 
         done, winner = False, 0
-        # print((x, y))
-        # print(self.array)
 
         lists = [np.array([], dtype = np.int8)] * 4
         for i in range(1 - self.k, self.k):
@@ -48,7 +46,6 @@ class mnk_env():
             lists[3] = self.append_if_valid(lists[3], x + i, y - i)
 
         for list in lists:
-            # print(list)
             n = 0
             for i in range(len(list)):
                 if list[i] == turn:
@@ -61,8 +58,6 @@ class mnk_env():
 
             if done:
                 break
-
-        # print((done, winner))
 
         return done, winner
 
@@ -77,9 +72,12 @@ class mnk_env():
         self.done, winner = self.check_result(action)
         reward = self.turn * winner
 
+        reward_dict = {1: 1, 0: -1, -1: -1}
+        reward = reward_dict[reward]
+
         self.turn = -self.turn
 
-        return self.get_state(), reward, self.done, None
+        return self.get_state(), reward, self.done
 
     def vaild_actions(self):
         return np.where(self.board == 0)

@@ -1,8 +1,5 @@
 #%%
-import math
-import random
-import matplotlib
-import matplotlib.pyplot as plt
+import math, random
 from collections import namedtuple, deque
 from itertools import count
 
@@ -14,13 +11,7 @@ import torch.nn.functional as F
 
 import game
 
-env = game.mnk_env(5, 5, 3)
-
-is_ipython = 'inline' in matplotlib.get_backend()
-if is_ipython:
-    from IPython import display
-
-plt.ion()
+env = game.mnk_env(3, 3, 3)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 Transition = namedtuple('Transition', ('state', 'action', 'next_state', 'reward'))
@@ -78,7 +69,6 @@ memory = ReplayMemory(10000)
 
 steps_done = 0
 
-
 def select_action(state):
     global steps_done
     sample = random.random()
@@ -93,32 +83,7 @@ def select_action(state):
         result = torch.randn(1, m * n)
 
     result[0][torch.flatten(state) != 0] = -np.inf
-    # print(state)
-    # print(result)
     return torch.tensor([[result.argmax()]])
-
-
-episode_durations = []
-
-
-def plot_durations():
-    plt.figure(2)
-    plt.clf()
-    durations_t = torch.tensor(episode_durations, dtype=torch.float)
-    plt.title('Training...')
-    plt.xlabel('Episode')
-    plt.ylabel('Duration')
-    plt.plot(durations_t.numpy())
-
-    if len(durations_t) >= 100:
-        means = durations_t.unfold(0, 100, 1).mean(1).view(-1)
-        means = torch.cat((torch.zeros(99), means))
-        plt.plot(means.numpy())
-
-    plt.pause(0.001)
-    if is_ipython:
-        display.clear_output(wait=True)
-        display.display(plt.gcf())
 
 def optimize_model():
     if len(memory) < BATCH_SIZE:
@@ -149,21 +114,15 @@ for i_episode in range(num_episodes):
     state = env.get_state()
     for t in count():
         action = select_action(state)
-        _, reward, done, _ = env.step(action.item())
+        new_state, reward, done = env.step(action.item())
         reward = torch.tensor([reward], device=device)
 
-        new_state = env.get_state()
         memory.push(state, action, new_state, reward)
         state = new_state
 
         optimize_model()
         if done:
-            episode_durations.append(t + 1)
-            # plot_durations()
             break
-
-    # print(t)
-    # print(env.get_obs(True))
 
     if i_episode % TARGET_UPDATE == 0:
         target_net.load_state_dict(policy_net.state_dict())
@@ -175,8 +134,8 @@ env.reset()
 done = False
 while not done:
     if env.turn > 0:
-        state, _, done, _ = env.step(int(input()))
-        print(env.get_obs(True))
+        state, reward, done = env.step(int(input()))
+        print(env.get_obs(True), reward)
     else:
-        state, _, done, _ = env.step(select_action(state).item())
-        print(env.get_obs(True))
+        state, reward, done = env.step(select_action(state).item())
+        print(env.get_obs(True), reward)
