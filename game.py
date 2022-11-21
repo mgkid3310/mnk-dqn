@@ -6,6 +6,7 @@ class mnk_env():
 
     def __init__(self, m = 3, n = 3, k = 3):
         self.shape = m, n
+        self.format = m, n, 1
         self.size = m * n
         self.k = k
 
@@ -25,7 +26,7 @@ class mnk_env():
             return self.board, self.turn
 
     def get_state(self):
-        return torch.tensor(np.array([self.board * self.turn]))
+        return torch.tensor(np.array([[self.array * self.turn]])).float()
 
     def check_result(self, action):
         if np.where(self.board == 0)[0].size == 0:
@@ -71,7 +72,7 @@ class mnk_env():
 
         return list
 
-    def step(self, action, visualize = False):
+    def step(self, action):
         self.board[action] = self.turn
         self.done, winner = self.check_result(action)
         reward = self.turn * winner
@@ -85,12 +86,21 @@ class mnk_env():
 
 if __name__ == '__main__':
     env = mnk_env(4, 5, 3)
-    print(env.step(1, True))
-    print(env.step(3, True))
-    print(env.step(4, True))
-    print(env.step(6, True))
-    print(env.step(7, True))
-    print(env.step(9, True))
-    print(env.step(19, True))
-    print(env.step(16, True))
-    print(env.step(13, True))
+    env.step(1)
+    print(env.get_obs(True))
+    env.step(3)
+    print(env.get_obs(True))
+    env.step(4)
+    print(env.get_obs(True))
+    env.step(6)
+    print(env.get_obs(True))
+    env.step(7)
+    print(env.get_obs(True))
+    env.step(9)
+    print(env.get_obs(True))
+    env.step(19)
+    print(env.get_obs(True))
+    env.step(16)
+    print(env.get_obs(True))
+    env.step(13)
+    print(env.get_obs(True))

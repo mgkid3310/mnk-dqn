@@ -14,7 +14,7 @@ import torch.nn.functional as F
 
 import game
 
-env = game.mnk_env(3, 3, 3)
+env = game.mnk_env(5, 5, 3)
 
 is_ipython = 'inline' in matplotlib.get_backend()
 if is_ipython:
@@ -39,18 +39,22 @@ class ReplayMemory(object):
         return len(self.memory)
 
 class DQN(nn.Module):
-    def __init__(self, size):
-        super(DQN, self).__init__()
-        self.l1 = nn.Linear(size, size)
-        self.l2 = nn.Linear(size, size)
-        self.l3 = nn.Linear(size, size)
+	def __init__(self, m, n, k):
+		super(DQN, self).__init__()
+		self.conv1 = nn.Conv2d(1, 4, k, padding = k//2)
+		self.bn1 = nn.BatchNorm2d(4)
+		self.conv2 = nn.Conv2d(4, 4, k, padding = k//2)
+		self.bn2 = nn.BatchNorm2d(4)
+		self.conv3 = nn.Conv2d(4, 4, k, padding = k//2)
+		self.bn3 = nn.BatchNorm2d(4)
+		self.head = nn.Linear(m * n * 4, m * n)
 
-    def forward(self, x):
-        x = x.to(device).float()
-        x = F.relu(self.l1(x))
-        x = F.relu(self.l2(x))
-        x = F.relu(self.l3(x))
-        return x
+	def forward(self, x):
+		x = x.to(device)
+		x = F.relu(self.bn1(self.conv1(x)))
+		x = F.relu(self.bn2(self.conv2(x)))
+		x = F.relu(self.bn3(self.conv3(x)))
+		return self.head(x.view(x.size(0), -1))
 
 env.reset()
 
@@ -61,10 +65,11 @@ EPS_END = 0.05
 EPS_DECAY = 200
 TARGET_UPDATE = 10
 
-size = env.size
+m, n = env.shape
+k = env.k
 
-policy_net = DQN(size).to(device)
-target_net = DQN(size).to(device)
+policy_net = DQN(m, n, k).to(device)
+target_net = DQN(m, n, k).to(device)
 target_net.load_state_dict(policy_net.state_dict())
 target_net.eval()
 
@@ -85,9 +90,9 @@ def select_action(state):
         with torch.no_grad():
             result = policy_net(state)
     else:
-        result = torch.randn(1, size)
+        result = torch.randn(1, m * n)
 
-    result[state != 0] = -np.inf
+    result[0][torch.flatten(state) != 0] = -np.inf
     # print(state)
     # print(result)
     return torch.tensor([[result.argmax()]])
@@ -137,7 +142,7 @@ def optimize_model():
     optimizer.step()
 
 #%%
-num_episodes = 10000
+num_episodes = 1000
 for i_episode in range(num_episodes):
     print(f'{i_episode}/{num_episodes}')
     env.reset()
