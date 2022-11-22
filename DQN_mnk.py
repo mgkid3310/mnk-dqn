@@ -11,7 +11,7 @@ import torch.nn.functional as F
 
 import game
 
-env = game.mnk_env(3, 3, 3)
+env = game.mnk_env(5, 5, 4)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 Transition = namedtuple('Transition', ('state', 'action', 'next_state', 'reward'))
@@ -32,6 +32,7 @@ class ReplayMemory(object):
 class DQN(nn.Module):
 	def __init__(self, m, n, k):
 		super(DQN, self).__init__()
+		k = k + 1 if k % 2 == 0 else k
 		self.conv1 = nn.Conv2d(1, 4, k, padding = k//2)
 		self.bn1 = nn.BatchNorm2d(4)
 		self.conv2 = nn.Conv2d(4, 4, k, padding = k//2)
