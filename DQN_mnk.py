@@ -137,12 +137,12 @@ done = False
 while not done:
     if env.turn > 0:
         action = int(input())
-        print(f'turn: {env.turn}, action: {action}')
         state, reward, done = env.step(action)
+        print(f'turn: {env.turn}, action: {action}, reward: {reward}')
         if done:
             print(env.get_obs(True))
     else:
         action = select_action(state).item()
-        print(f'turn: {env.turn}, action: {action}')
         state, reward, done = env.step(action)
+        print(f'turn: {env.turn}, action: {action}, reward: {reward}')
         print(env.get_obs(True))

@@ -39,10 +39,10 @@ class mnk_env():
 
         lists = [np.array([], dtype = np.int8)] * 4
         for i in range(1 - self.k, self.k):
-            lists[0] = self.append_if_valid(lists[0], x + i, y)
-            lists[1] = self.append_if_valid(lists[1], x, y + i)
-            lists[2] = self.append_if_valid(lists[2], x + i, y + i)
-            lists[3] = self.append_if_valid(lists[3], x + i, y - i)
+            lists[0] = self.append_if_valid(board, lists[0], x + i, y)
+            lists[1] = self.append_if_valid(board, lists[1], x, y + i)
+            lists[2] = self.append_if_valid(board, lists[2], x + i, y + i)
+            lists[3] = self.append_if_valid(board, lists[3], x + i, y - i)
 
         done, winner = self.check_win(lists, turn)
 
@@ -66,9 +66,9 @@ class mnk_env():
         win_in_one, blocks = 0, []
         for action in actions:
             board_copy = self.board.copy()
-            board_copy[action] = -turn
+            board_copy[action] = turn
 
-            done, winner = self.check_result(board_copy, action, -turn)
+            done, winner = self.check_result(board_copy, action, turn)
             if done:
                 win_in_one = winner
                 blocks.append(action)
@@ -90,16 +90,16 @@ class mnk_env():
 
         return False, 0
 
-    def append_if_valid(self, list, x, y):
+    def append_if_valid(self, board, list, x, y):
         if 0 <= x < self.shape[0] and 0 <= y < self.shape[1]:
-            list = np.append(list, self.board.reshape(self.shape)[x, y])
+            list = np.append(list, board.reshape(self.shape)[x, y])
 
         return list
 
     def step(self, action):
         self.board[action] = self.turn
         self.done, self.winner = self.check_result(self.board, action, self.turn)
-        self.win_in_one, self.blocks = self.check_win_in_one(self.turn, self.done)
+        self.win_in_one, self.blocks = self.check_win_in_one(-self.turn, self.done)
 
         if self.done:
             reward = self.turn * self.winner
@@ -113,8 +113,12 @@ class mnk_env():
         return np.where(self.board == 0)[0]
 
 if __name__ == '__main__':
-    env = mnk_env(5, 5, 3)
+    env = mnk_env(3, 3, 3)
+    print(env.get_obs(True))
+
     done = False
     while not done:
-        state, reward, done = env.step(int(input()))
+        action = int(input())
+        state, reward, done = env.step(action)
+        print(f'turn: {env.turn}, action: {action}, reward: {reward}')
         print(env.get_obs(True))
