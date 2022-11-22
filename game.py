@@ -14,29 +14,28 @@ class mnk_env():
 
     def reset(self):
         self.board = np.zeros(self.size, dtype = np.int8)
-        self.array = self.board.reshape(self.shape)
 
         self.turn = 1
+        self.win_in_one = 0
+        self.blocks = []
+        self.winner = 0
         self.done = False
 
     def get_obs(self, visualize = False):
         if visualize:
-            return self.array, self.turn
+            return self.board.reshape(self.shape), self.turn
         else:
             return self.board, self.turn
 
     def get_state(self):
-        return torch.tensor(np.array([[self.array * self.turn]])).float()
+        array = self.board.reshape(self.shape)
+        return torch.tensor(np.array([[array * self.turn]])).float()
 
-    def check_result(self, action):
-        if np.where(self.board == 0)[0].size == 0:
+    def check_result(self, board, action, turn):
+        if np.where(board == 0)[0].size == 0:
             return True, 0
 
-        turn = self.board[action]
         x, y = action // self.shape[1], action % self.shape[1]
-        self.array = self.board.reshape(self.shape)
-
-        done, winner = False, 0
 
         lists = [np.array([], dtype = np.int8)] * 4
         for i in range(1 - self.k, self.k):
@@ -45,60 +44,77 @@ class mnk_env():
             lists[2] = self.append_if_valid(lists[2], x + i, y + i)
             lists[3] = self.append_if_valid(lists[3], x + i, y - i)
 
-        for list in lists:
-            n = 0
-            for i in range(len(list)):
-                if list[i] == turn:
-                    n += 1
-                    if n >= self.k:
-                        done, winner = True, turn
-                        break
-                else:
-                    n = 0
+        done, winner = self.check_win(lists, turn)
 
+        return done, winner
+
+    def check_win(self, lists, turn):
+        done, winner = False, 0
+
+        for list in lists:
+            done, winner = self.check_streak(list, turn)
             if done:
                 break
 
         return done, winner
 
+    def check_win_in_one(self, turn, done):
+        if done:
+            return 0, []
+
+        actions = self.vaild_actions()
+        win_in_one, blocks = 0, []
+        for action in actions:
+            board_copy = self.board.copy()
+            board_copy[action] = -turn
+
+            done, winner = self.check_result(board_copy, action, -turn)
+            if done:
+                win_in_one = winner
+                blocks.append(action)
+
+        return win_in_one, blocks
+
+    def check_streak(self, list, turn):
+        if self.k > len(list):
+            return False, 0
+
+        n = 0
+        for i in range(len(list)):
+            if list[i] == turn:
+                n += 1
+                if n >= self.k:
+                    return True, turn
+            else:
+                n = 0
+
+        return False, 0
+
     def append_if_valid(self, list, x, y):
         if 0 <= x < self.shape[0] and 0 <= y < self.shape[1]:
-            list = np.append(list, self.array[x, y])
+            list = np.append(list, self.board.reshape(self.shape)[x, y])
 
         return list
 
     def step(self, action):
         self.board[action] = self.turn
-        self.done, winner = self.check_result(action)
-        reward = self.turn * winner
+        self.done, self.winner = self.check_result(self.board, action, self.turn)
+        self.win_in_one, self.blocks = self.check_win_in_one(self.turn, self.done)
 
-        reward_dict = {1: 1, 0: -1, -1: -1}
-        reward = reward_dict[reward]
-
-        self.turn = -self.turn
+        if self.done:
+            reward = self.turn * self.winner
+        else:
+            reward = self.turn * self.win_in_one * len(self.blocks)
+            self.turn = -self.turn
 
         return self.get_state(), reward, self.done
 
     def vaild_actions(self):
-        return np.where(self.board == 0)
+        return np.where(self.board == 0)[0]
 
 if __name__ == '__main__':
-    env = mnk_env(4, 5, 3)
-    env.step(1)
-    print(env.get_obs(True))
-    env.step(3)
-    print(env.get_obs(True))
-    env.step(4)
-    print(env.get_obs(True))
-    env.step(6)
-    print(env.get_obs(True))
-    env.step(7)
-    print(env.get_obs(True))
-    env.step(9)
-    print(env.get_obs(True))
-    env.step(19)
-    print(env.get_obs(True))
-    env.step(16)
-    print(env.get_obs(True))
-    env.step(13)
-    print(env.get_obs(True))
+    env = mnk_env(5, 5, 3)
+    done = False
+    while not done:
+        state, reward, done = env.step(int(input()))
+        print(env.get_obs(True))

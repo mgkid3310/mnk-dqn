@@ -11,7 +11,7 @@ import torch.nn.functional as F
 
 import game
 
-env = game.mnk_env(5, 5, 4)
+env = game.mnk_env(3, 3, 3)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 Transition = namedtuple('Transition', ('state', 'action', 'next_state', 'reward'))
@@ -132,11 +132,17 @@ print('Complete')
 
 #%%
 env.reset()
+print(env.get_obs(True))
 done = False
 while not done:
     if env.turn > 0:
-        state, reward, done = env.step(int(input()))
-        print(env.get_obs(True), reward)
+        action = int(input())
+        print(f'turn: {env.turn}, action: {action}')
+        state, reward, done = env.step(action)
+        if done:
+            print(env.get_obs(True))
     else:
-        state, reward, done = env.step(select_action(state).item())
-        print(env.get_obs(True), reward)
+        action = select_action(state).item()
+        print(f'turn: {env.turn}, action: {action}')
+        state, reward, done = env.step(action)
+        print(env.get_obs(True))
