@@ -42,6 +42,9 @@ class mnk_env():
         self.column = column -1
         victory = self.process_move()
         print(self.format_board())
+        if all(all(map('.'.__ne__, row)) for row in self.board):
+            print(f"Draw!")
+            exit()
         if victory:
             print(f"\n\nPlayer {self.player} won!")
             exit()
