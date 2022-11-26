@@ -90,5 +90,8 @@ __Ⅴ. Evaluation & Analysis__
 __Ⅵ. Related Work__
  * https://ko.wikipedia.org/wiki/M,n,k-%EA%B2%8C%EC%9E%84
  * https://github.com/bruiseUneo/AI_X_DeepLearning
+ * [Deep Learning: A Visual Approach(Andrew Glassner)](https://www.glassner.com/portfolio/deep-learning-a-visual-approach/)
+ * https://spacebike.tistory.com/53?category=978529
+
 
 __Ⅶ. Conclusion: Discussion__
