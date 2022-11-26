@@ -78,6 +78,7 @@ Q에 내가 가진 환경과 행동을 주면 Q는 이런 환경에서 이런 �
 <p align="center">
 <img src = "./image/q_algorithm.png">
 </p>
+
 __Ⅲ. Datasets__     
  * m, n, k = 5, 5, 4
         
