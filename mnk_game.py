@@ -6,6 +6,9 @@ class mnk_env():
         self.m = m
         self.n = n
         self.k = k
+        self.reset()
+    
+    def reset(self):
         self.board = [["."] * self.n for _ in range(self.m)]
 
     def count(self, dy, dx):
@@ -41,13 +44,8 @@ class mnk_env():
         self.row = row -1
         self.column = column -1
         victory = self.process_move()
-        print(self.format_board())
-        if all(all(map('.'.__ne__, row)) for row in self.board):
-            print(f"Draw!")
-            exit()
-        if victory:
-            print(f"\n\nPlayer {self.player} won!")
-            exit()
+        
+        return victory
 
 if __name__ == "__main__":
     m, n, k = map(int, input("Enter M N K (M is height, N is width, K is the length of the winning sequence)\n").split())
@@ -57,4 +55,11 @@ if __name__ == "__main__":
     players = ["O", "X"]
     for player in itertools.cycle(players):
         row, column = map(int, input(f"Player {player}, please, enter row and column\n").split())
-        env.step(player, row, column)
+        victory = env.step(player, row, column)
+        print(env.format_board())
+        if victory:
+            print(f"\n\nPlayer {player} won!")
+            break
+        elif all(all(map('.'.__ne__, row)) for row in env.board):
+            print(f"Draw!")
+            break
