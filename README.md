@@ -15,12 +15,12 @@ __Ⅰ. Proposal (Option A)__
 mnk-game에서 k가 1, 2, 3인 경우에 확실한 파훼법이 존재하는데, k=4인 경우에는 명백한 파훼법이 존재하지 않으므로 이 경우에 대해서 DQN(Deep Q-Network)를 이용해 최선의 전략을 제공할 수 있는 모델을 완성하는 것을 이번 프로젝트의 목적으로 한다.      
 
 __Ⅱ. Theoretical background__
- * 강화학습   
- * Q-Table (Q-Learning)
- * Neural Network
+ * 강화학습 (Reinforcement Learning)
+ * Q-러닝 (Q-Learning)
+ * 인공 신경망 (Neural Network)
  * DQN (Deep Q-Network) 
-
-## 강화학습
+ * CNN (Convolutional Neural Network)
+## 강화학습 (Reinforcement Learning)
 ### 강화 학습 정의 
 강화 학습은 기계 학습의 한 영역이다. 행동심리학에서 영감을 받았으며, 어떤 환경 안에서 정의된 에이전트가 현재의 상태를 인식하여, 선택 가능한 행동들 중 보상을 최대화하는 행동 혹은 행동 순서를 선택하는 방법이다.
 ### 강화학습 기본 아이디어
@@ -58,7 +58,7 @@ __Ⅱ. Theoretical background__
 그렇지 않으면 이동이 에이전트에게 얼마나 좋은지에 따라 보상을 계산한다.
 이제 다른 플레이어를 시뮬레이션하는 환경이 자체적으로 움직인다. 이기면 보상을 매우 낮게 변경한다. 게임이 환경이나 에이전트의 이동으로 인해 종료된 경우 보상을 궁극적인 보상 또 는 최종 보상이라고 한다. 6단계에서 환경은 에이전트에게 보상을 전송해 에이전트가 선택한 이동이 얼마나 좋은지 알 수 있게 한다. 아무도 이기지 못했다면 루프의 시작 부분으로 돌아 가고 에이전트는 다음 턴을 시작한다.
 
-## Q-러닝
+## Q-러닝 (Q-Learning)
 Q 러닝은 주어진 환경에서 주어진 행동을 수행하는 것이 가져다주는 효용의 기대값을 예측하는 함수인 Q 함수를 학습함으로써 최적의 정책을 학습한다. 정책이란 주어진 상태에서 어떤 행동을 수행할지 나타내는 규칙이다. Q 함수를 학습하고 나면 각 상태에서 최고의 Q(현재 상태에서 취한 행동의 보상에 대한 퀄리티)를 주는 행동을 수행함으로써 최적의 정책을 유도할 수 있다. Q 러닝의 장점 중 하나는 주어진 환경의 모델 없이도 수행하는 행동의 기대값을 비교할 수 있다는 점이다. 뿐만 아니라 Q 러닝은 전이가 확률적으로 일어나거나 보상이 확률적
 으로 주어지는 환경에서도 별다른 변형 없이 적용될 수 있다는 것이 장점이다.
 ### Q-러닝 원리
@@ -79,7 +79,7 @@ Q에 내가 가진 환경과 행동을 주면 Q는 이런 환경에서 이런 �
 <p align="center">
 <img src = "./image/q_algorithm.png", width="500" height="300">
 </p>
-
+## 인공 신경망 (Neural Network)
 __Ⅲ. Datasets__     
  * m, n, k = 5, 5, 4
         
@@ -96,6 +96,5 @@ __Ⅵ. Related Work__
  * https://github.com/bruiseUneo/AI_X_DeepLearning
  * [Deep Learning: A Visual Approach(Andrew Glassner)](https://www.glassner.com/portfolio/deep-learning-a-visual-approach/)
  * https://spacebike.tistory.com/53?category=978529
-
 
 __Ⅶ. Conclusion: Discussion__
