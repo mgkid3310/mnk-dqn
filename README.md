@@ -79,6 +79,7 @@ Q에 내가 가진 환경과 행동을 주면 Q는 이런 환경에서 이런 �
 <img src = "./image/q_algorithm.png", width="500" height="300">
 </p>
 ## 인공 신경망 (Neural Network)
+
 __Ⅲ. Datasets__     
  * m, n, k = 5, 5, 4
         
