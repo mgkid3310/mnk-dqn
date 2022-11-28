@@ -87,7 +87,7 @@ def select_action(state):
         result = torch.randn(1, m * n)
 
     result[0][torch.flatten(state) != 0] = -np.inf
-    return torch.tensor([[result.argmax()]])
+    return torch.tensor([[result.argmax()]], device=device)
 
 def optimize_model():
     if len(memory) < BATCH_SIZE:
