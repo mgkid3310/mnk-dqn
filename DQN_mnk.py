@@ -32,14 +32,17 @@ class ReplayMemory(object):
 class DQN(nn.Module):
 	def __init__(self, m, n, k):
 		super(DQN, self).__init__()
+
+		f_1, f_2, f_3 = 4, 16, 32
 		k = k + 1 if k % 2 == 0 else k
-		self.conv1 = nn.Conv2d(1, 4, k, padding = k//2)
-		self.bn1 = nn.BatchNorm2d(4)
-		self.conv2 = nn.Conv2d(4, 4, k, padding = k//2)
-		self.bn2 = nn.BatchNorm2d(4)
-		self.conv3 = nn.Conv2d(4, 4, k, padding = k//2)
-		self.bn3 = nn.BatchNorm2d(4)
-		self.head = nn.Linear(m * n * 4, m * n)
+
+		self.conv1 = nn.Conv2d(1, f_1, k, padding = k//2)
+		self.bn1 = nn.BatchNorm2d(f_1)
+		self.conv2 = nn.Conv2d(f_1, f_2, k, padding = k//2)
+		self.bn2 = nn.BatchNorm2d(f_2)
+		self.conv3 = nn.Conv2d(f_2, f_3, k, padding = k//2)
+		self.bn3 = nn.BatchNorm2d(f_3)
+		self.head = nn.Linear(m * n * f_3, m * n)
 
 	def forward(self, x):
 		x = x.to(device)
