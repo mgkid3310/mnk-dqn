@@ -83,8 +83,14 @@ __Ⅱ. Theoretical background__
  활성화 함수는 비선형 분류를 가능하게 하고자 도입된 함수이다. 현실 세계의 data의 많은 관계들은 비선형이기 때문에 인공 신경망에서 활성화 함수의 역할은 매우 중요하다. 활성화 함수의 종류로는 sigmoid, tanh, ReLU, Leaky ReLU, Maxout, ELU 등이 있다. 
  
  인공 뉴런 하나를 사용하면 선형 분류가 가능하고 최적화된 결정 경계를 찾아 두 개의 다른 클래스를 분류한다. 그러나 이렇게 인공 뉴런 하나만을 사용하면 비선형 문제를 해결할 수 없는데, 이를 보완하려는 목적으로 인공 신경망이라는 개념이 도입됐다. 인공 뉴런은 인공 신경망의 가장 단순한 구성요소인데, 이런 인공 뉴런들을 여러 층으로 구성하여 비선형 문제를 해결하는 수학적 모델이 인공 신경망이다.
+<p align="center">
+<img src = "./image/Artificial Neuron.png", width="500" height="300">
+</p>
 
  인공 신경망은 인공 뉴런들이 여러 층으로 구성되어 있는 특징으로부터 Multi-Layer Perceptron(MLP)라는 이름을 가지고 있으며, 각 층의 각각의 인공 뉴런이 다음 층의 각각의 인공 뉴런에 연결되어 있는 특징으로부터 Fully(Densely) Connected Neural Network(FCNN)이라는 이름도 가지고 있다.
+<p align="center">
+<img src = "./image/NN.png", width="500" height="300">
+</p>
 
  인공 신경망은 크게 Input layer, Hidden (invisible) layer, Output layer으로 구성되어 있다. 위의 그림처럼 Hidden layer가 하나인 경우의 인공 신경망을 Shallow Neural Network라 하고, Hidden layer가 두 개 이상인 경우의 인공 신경망을 Deep Neural Network라 한다. 
 
@@ -95,16 +101,30 @@ __Ⅱ. Theoretical background__
  Output layer는 최종 예측을 수행하는 output neuron들로 구성되어 있다. Output layer의 크기도 프로그램을 설계하는 사람이 직접 정하는 하이퍼파라미터이다. 이 크기는 해결하고자 하는 문제의 종류에 따라 결정된다. 대표적으로는 Binary Classification, Multi-class classification, Multi-label classification, Regression이 있다.
 
 ## DQN (Deep Q-Network)
- Q-러닝은 매우 강력한 알고리즘이긴 하지만, 일반성이 부족하다는 주된 취약점을 가지고 있다. Q-러닝 에이전트는 이전에 보지 못한 상태에 대해서 어떤 행동을 취해야 하는지에 대한 단서가 없다. 즉, Q-러닝 에이전트는 이전에 보지 못한 상태에 대해서 Q 값을 측정할 능력이 없다. 이러한 문제를 해결하기 위해 DQN은 2차원 배열 대신에 신경망을 도입한다.
+ Q-러닝은 매우 강력한 알고리즘이긴 하지만, 일반성이 부족하다는 주된 취약점을 가지고 있다. Q-러닝 에이전트는 이전에 보지 못한 상태에 대해서 어떤 행동을 취해야 하는지에 대한 단서가 없다. 즉, Q-러닝 에이전트는 이전에 보지 못한 상태에 대해서 Q 값을 측정할 능력이 없다. 이러한 문제를 해결하기 위해 DQN은 2차원 배열 대신에 신경망을 도입한다. 
+<p align="center">
+<img src = "./image/DQN.png", width="500" height="300">
+</p> 
 
  2013년에 DeepMind사는 위의 그림과 같이 Atari game에 DQN을 적용했다. Input data는 현재 게임 상황에 대한 미가공의 그림이었고, 이는 convolutional layer뿐만 아니라 fully connected layer를 포함하는 여러 층을 통과하였다. 그리고 Output data는 에이전트가 취할 수 있는 각각의 행동에 대한 Q 값이었다. DQN에서 network는 Q-러닝 update equation을 통해 훈련한다.
+<p align="center">
+<img src = "./image/수식3.png", width="300" height="70">
+</p>
  
  Q-러닝에 대한 목표 Q 값은 위 그림과 같다.  ϕ는 상태 s와 동일하고, 𝜽는 신경망의 가중치 값을 나타낸다. 따라서 신경망에 대한 손실 함수는 목표 Q 값과 network로부터의 Q 값 output 사이의 제곱 오차로 정의된다.
+ 
+**DQN Pseudo Code:**
+<p align="center">
+<img src = "./image/Pseudo Code.png", width="500" height="300">
+</p> 
 
  DQN을 훈련하기 위해서 다음의 두 가지 기술들이 또한 필요하다. 첫 번째는 experience replay이다. 전형적인 강화학습 구성에서 훈련 표본들은 매우 상관되어 있고, data 효율이 낮기 때문에, 신경망이 훈련 표본들을 수렴하기 어렵다. 표본 분배 문제를 해결하기 위해서 experience replay memory를 만들고 experience를 저장한 후 랜덤하게 뽑아서 학습한다. 이를 통해 덜 상관되어 있고 고르게 분포된 data로 학습할 수 있게 된다. 두 번째는 서로 다른 목표 network를 사용하는 것이다. 목표 Q Network는 추정 값과 같은 구조를 가지고 있다. 위의 pseudo code를 보면, 매번의 C 단계에서 목표 network는 다른 것으로 변경된다. 따라서 변동이 덜 심해지고, 보다 안정적인 훈련을 할 수 있게 된다.
  
 ## CNN (Convolutional Neural Network)
  CNN(Convolutional Neural Network)는 이미지를 딥러닝 모델에 적용하기 위해 고안된 알고리즘이다. 이전에는 Multi-layered network를 딥러닝 모델로 사용했었는데, 이를 사용할 경우 아무리 작은 이미지라고 할지라도 하나에 200개가 넘는 픽셀을 가지고 있기 때문에 학습될 파라미터의 수가 수만 개가 넘는다. 따라서 Multi-layered network를 사용할 경우 모델의 학습 시간이 매우 길어지고 신경망의 크기가 커지며 변수의 개수가 커진다는 문제가 발생한다. 그리고 가장 큰 문제는 Multi-layered network가 이미지의 기하학적 특징을 전혀 학습하지 못한다는 것이다. 이러한 문제들을 해결하면서 이미지를 학습하기 위해 고안된 알고리즘이 바로 CNN이다.
+<p align="center">
+<img src = "./image/CNN.png", width="500" height="300">
+</p> 
  
  CNN은 크게 convolution, sub-sampling, fully-connected layer의 세 가지 부분으로 이루어져 있다.
 
