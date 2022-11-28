@@ -20,7 +20,7 @@ __Ⅱ. Theoretical background__
  * 인공 신경망 (Neural Network)
  * DQN (Deep Q-Network) 
  * CNN (Convolutional Neural Network)
-## 강화학습 (Reinforcement Learning)
+# 강화학습 (Reinforcement Learning)
 ### 강화 학습 정의 
  강화 학습은 기계 학습의 한 영역이다. 행동심리학에서 영감을 받았으며, 어떤 환경 안에서 정의된 에이전트가 현재의 상태를 인식하여, 선택 가능한 행동들 중 보상을 최대화하는 행동 혹은 행동 순서를 선택하는 방법이다.
 ### 강화학습 기본 아이디어
