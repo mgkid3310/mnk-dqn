@@ -76,7 +76,43 @@ __Ⅱ. Theoretical background__
 </p>
 
 ## 인공 신경망 (Neural Network)
- 인공 신경망을 이해하기 위해 우선 인공 뉴런에 대해 설명하고자 한다. 인공 뉴런(Artificial Neuron)은 Perceptron, Unit, Node라고도 불리는데, 이는 생물학에서의 뉴런이라는 신경세포 모형에서부터 영감을 얻어 만들어진 모델이다. 인공 뉴런은 가중치가 곱해진 입력 값들의 합과 활성화 함수로 구성되어 있다. 활성화 함수는 비선형 분류를 가능하게 하고자 도입된 함수이다. 현실 세계의 data의 많은 관계들은 비선형이기 때문에 인공 신경망에서 활성화 함수의 역할은 매우 중요하다. 활성화 함수의 종류로는 sigmoid, tanh, ReLU, Leaky ReLU, Maxout, ELU 등이 있다. 인공 뉴런 하나를 사용하면 선형 분류가 가능하고 최적화된 결정 경계를 찾아 두 개의 다른 클래스를 분류한다. 그러나 이렇게 인공 뉴런 하나만을 사용하면 비선형 문제를 해결할 수 없는데, 이를 보완하려는 목적으로 인공 신경망이라는 개념이 도입됐다. 인공 뉴런은 인공 신경망의 가장 단순한 구성요소인데, 이런 인공 뉴런들을 여러 층으로 구성하여 비선형 문제를 해결하는 수학적 모델이 인공 신경망이다.
+ 인공 신경망을 이해하기 위해 우선 인공 뉴런에 대해 설명하고자 한다. 
+ 
+ 인공 뉴런(Artificial Neuron)은 Perceptron, Unit, Node라고도 불리는데, 이는 생물학에서의 뉴런이라는 신경세포 모형에서부터 영감을 얻어 만들어진 모델이다. 인공 뉴런은 가중치가 곱해진 입력 값들의 합과 활성화 함수로 구성되어 있다. 
+ 
+ 활성화 함수는 비선형 분류를 가능하게 하고자 도입된 함수이다. 현실 세계의 data의 많은 관계들은 비선형이기 때문에 인공 신경망에서 활성화 함수의 역할은 매우 중요하다. 활성화 함수의 종류로는 sigmoid, tanh, ReLU, Leaky ReLU, Maxout, ELU 등이 있다. 
+ 
+ 인공 뉴런 하나를 사용하면 선형 분류가 가능하고 최적화된 결정 경계를 찾아 두 개의 다른 클래스를 분류한다. 그러나 이렇게 인공 뉴런 하나만을 사용하면 비선형 문제를 해결할 수 없는데, 이를 보완하려는 목적으로 인공 신경망이라는 개념이 도입됐다. 인공 뉴런은 인공 신경망의 가장 단순한 구성요소인데, 이런 인공 뉴런들을 여러 층으로 구성하여 비선형 문제를 해결하는 수학적 모델이 인공 신경망이다.
+
+ 인공 신경망은 인공 뉴런들이 여러 층으로 구성되어 있는 특징으로부터 Multi-Layer Perceptron(MLP)라는 이름을 가지고 있으며, 각 층의 각각의 인공 뉴런이 다음 층의 각각의 인공 뉴런에 연결되어 있는 특징으로부터 Fully(Densely) Connected Neural Network(FCNN)이라는 이름도 가지고 있다.
+
+ 인공 신경망은 크게 Input layer, Hidden (invisible) layer, Output layer으로 구성되어 있다. 위의 그림처럼 Hidden layer가 하나인 경우의 인공 신경망을 Shallow Neural Network라 하고, Hidden layer가 두 개 이상인 경우의 인공 신경망을 Deep Neural Network라 한다. 
+
+ Input layer는 input neuron들로 구성되어 있고 이 뉴런들은 x1, x2 등과 같은 input 값을 입력받는다. Input neuron들은 input data를 그저 보존한다. Bias 뉴런은 항상 1의 값을 출력한다. Input layer는 그 종류가 다양한데, 가장 유명한 것으로는 Dense(FC, Fully Connected), Convolutional, Recurrent가 있다. Input layer의 종류에 따라 input data의 크기가 결정된다. Input neuron들은 항상 숫자 값을 입력받는다. 그리고 이러한 숫자 값들은 tensor의 형태로 배열된다. Dense input layer에서는 input layer의 크기가 input data의 feature (column)의 수와 동일하다. 이것들은 first hidden layer의 첫 번째 입력 값들이고 가중치를 통해 hidden layer에 있는 뉴런들과 fully connected된다. Input layer의 크기는 훈련 전에 모델에서 특정되어야 할 하이퍼파라미터이다.
+
+ 또한, deep neural network에서 hidden layer의 수는 프로그램을 설계하는 사람이 직접 정해야 하는 하이퍼파라미터이다. Hidden layer의 수는 인공 신경망의 깊이를 측정한다. Hidden layer의 수가 증가할수록 인공 신경망은 data의 더 복잡한 관계를 모델링 할 수 있다. 그러나 모델이 훈련을 하는데 시간이 오래 걸리며 과적합의 문제가 발생할 수 있다. 과적합은 인공 신경망이 훈련 data에 과하게 훈련된 상태를 뜻한다.
+
+ Output layer는 최종 예측을 수행하는 output neuron들로 구성되어 있다. Output layer의 크기도 프로그램을 설계하는 사람이 직접 정하는 하이퍼파라미터이다. 이 크기는 해결하고자 하는 문제의 종류에 따라 결정된다. 대표적으로는 Binary Classification, Multi-class classification, Multi-label classification, Regression이 있다.
+
+## DQN (Deep Q-Network)
+ Q-러닝은 매우 강력한 알고리즘이긴 하지만, 일반성이 부족하다는 주된 취약점을 가지고 있다. Q-러닝 에이전트는 이전에 보지 못한 상태에 대해서 어떤 행동을 취해야 하는지에 대한 단서가 없다. 즉, Q-러닝 에이전트는 이전에 보지 못한 상태에 대해서 Q 값을 측정할 능력이 없다. 이러한 문제를 해결하기 위해 DQN은 2차원 배열 대신에 신경망을 도입한다.
+
+ 2013년에 DeepMind사는 위의 그림과 같이 Atari game에 DQN을 적용했다. Input data는 현재 게임 상황에 대한 미가공의 그림이었고, 이는 convolutional layer뿐만 아니라 fully connected layer를 포함하는 여러 층을 통과하였다. 그리고 Output data는 에이전트가 취할 수 있는 각각의 행동에 대한 Q 값이었다. DQN에서 network는 Q-러닝 update equation을 통해 훈련한다.
+ 
+ Q-러닝에 대한 목표 Q 값은 위 그림과 같다.  ϕ는 상태 s와 동일하고, 𝜽는 신경망의 가중치 값을 나타낸다. 따라서 신경망에 대한 손실 함수는 목표 Q 값과 network로부터의 Q 값 output 사이의 제곱 오차로 정의된다.
+
+ DQN을 훈련하기 위해서 다음의 두 가지 기술들이 또한 필요하다. 첫 번째는 experience replay이다. 전형적인 강화학습 구성에서 훈련 표본들은 매우 상관되어 있고, data 효율이 낮기 때문에, 신경망이 훈련 표본들을 수렴하기 어렵다. 표본 분배 문제를 해결하기 위해서 experience replay memory를 만들고 experience를 저장한 후 랜덤하게 뽑아서 학습한다. 이를 통해 덜 상관되어 있고 고르게 분포된 data로 학습할 수 있게 된다. 두 번째는 서로 다른 목표 network를 사용하는 것이다. 목표 Q Network는 추정 값과 같은 구조를 가지고 있다. 위의 pseudo code를 보면, 매번의 C 단계에서 목표 network는 다른 것으로 변경된다. 따라서 변동이 덜 심해지고, 보다 안정적인 훈련을 할 수 있게 된다.
+ 
+## CNN (Convolutional Neural Network)
+ CNN(Convolutional Neural Network)는 이미지를 딥러닝 모델에 적용하기 위해 고안된 알고리즘이다. 이전에는 Multi-layered network를 딥러닝 모델로 사용했었는데, 이를 사용할 경우 아무리 작은 이미지라고 할지라도 하나에 200개가 넘는 픽셀을 가지고 있기 때문에 학습될 파라미터의 수가 수만 개가 넘는다. 따라서 Multi-layered network를 사용할 경우 모델의 학습 시간이 매우 길어지고 신경망의 크기가 커지며 변수의 개수가 커진다는 문제가 발생한다. 그리고 가장 큰 문제는 Multi-layered network가 이미지의 기하학적 특징을 전혀 학습하지 못한다는 것이다. 이러한 문제들을 해결하면서 이미지를 학습하기 위해 고안된 알고리즘이 바로 CNN이다.
+ 
+ CNN은 크게 convolution, sub-sampling, fully-connected layer의 세 가지 부분으로 이루어져 있다.
+
+ Convolution은 filter (혹은 kernel)을 사용해서 이미지의 특징을 추출하는 단계를 말한다. 즉, 이미지와 filter의 합성곱(convolution) 연산으로 이미지의 특징을 추출하는 단계이다. Convolution layer 단계의 목적은 filter을 학습시키는 것이다. 즉, filter에 들어가는 숫자를 사람이 지정하는 것이 아니라, filter 값들이 back propagation을 통해 optimized 될 수 있게 하는 것이 CNN의 주된 목적이다. 5x5 이미지, 3x3 filter, stride = 1에 대한 convolution 연산을 수행하면 3x3 크기의 이미지를 갖게 되는데, 이렇게 convolution 연산은 그 수행 과정에서 반드시 이미지의 크기가 줄어들게 된다. 이는 이미지의 정보를 잃게 되는 불이익을 가져다주는데, 이럴 경우 보통 주변에 0과 같은 의미없는 값을 넣어 1픽셀씩 키워주면 원래의 이미지 크기를 유지한다. 이런 방법을 Padding이라 하며, 0으로 테두리를 추가한 경우를 zero padding이라 부른다. 일반적으로 이미지에서 여러 개의 다른 특징들을 찾아내기 위해 CNN에서는 여러 개의 filter를 사용한다.
+
+ Sub-sampling(Pooling)는 이미지의 topology 변화에 영향을 받지 않게 하기 위해 window 내에서 대표값만 기억하는 단계이다. 일반적으로 sub-sampling은 window의 특정 위치값이나 평균값(average pooling)을 사용하는데, 신경망에서는 최대값(max pooling)을 주로 사용한다. 실제 신경세포학적으로 보통 시신경의 강한 신호만 살아남고 나머지는 무시되기 때문이다.
+ 
+ 입력값이 convolution layer, sub-sampling layer를 거치면 local feature를 찾을 수 있다. 그리고 그 과정을 반복하면 global feature를 찾을 수 있는데, fully-connected layer는 이 global feature를 학습하는 단계이다.
 
 __Ⅲ. Datasets__     
  * m, n, k = 5, 5, 4
@@ -94,5 +130,9 @@ __Ⅵ. Related Work__
  * https://github.com/bruiseUneo/AI_X_DeepLearning
  * [Deep Learning: A Visual Approach(Andrew Glassner)](https://www.glassner.com/portfolio/deep-learning-a-visual-approach/)
  * https://spacebike.tistory.com/53?category=978529
+ * https://towardsdatascience.com/the-concept-of-artificial-neurons-perceptrons-in-neural-networks-fab22249cbfc
+ * https://rukshanpramoditha.medium.com/one-hidden-layer-shallow-neural-network-architecture-d45097f649e6
+ * https://medium.com/towards-data-science/introduction-to-various-reinforcement-learning-algorithms-i-q-learning-sarsa-dqn-ddpg-72a5e0cb6287
+ * https://sonsnotation.blogspot.com/2020/11/7-convolutional-neural-networkcnn.html
 
 __Ⅶ. Conclusion: Discussion__
