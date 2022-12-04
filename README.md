@@ -7,7 +7,8 @@
 오하은, 서울 컴퓨터소프트웨어학부, haeunoh.tech@gmail.com     
 길준호, 에리카 전자공학부, gjh625com@naver.com 
 
-[Ⅰ. Proposal (Option A)](#Ⅰ.-Proposal-(Option-A))    
+[Ⅰ. Proposal (Option A)](#Ⅰ.-Proposal-(Option-A))
+
     [Motivation:](#Motivation:)
 
 ## Ⅰ. Proposal (Option A)
