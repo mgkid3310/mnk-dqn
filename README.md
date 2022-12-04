@@ -142,7 +142,6 @@ __Ⅳ. Methodology__
  * input layer: m*n
  * dense 2*m*n relu
  * output m*n linear
- * tkinter
 
 __Ⅴ. Evaluation & Analysis__      
 
