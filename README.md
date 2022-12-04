@@ -84,12 +84,12 @@
  
  인공 뉴런 하나를 사용하면 선형 분류가 가능하고 최적화된 결정 경계를 찾아 두 개의 다른 클래스를 분류한다. 그러나 이렇게 인공 뉴런 하나만을 사용하면 비선형 문제를 해결할 수 없는데, 이를 보완하려는 목적으로 인공 신경망이라는 개념이 도입됐다. 인공 뉴런은 인공 신경망의 가장 단순한 구성요소인데, 이런 인공 뉴런들을 여러 층으로 구성하여 비선형 문제를 해결하는 수학적 모델이 인공 신경망이다.
 <p align="center">
-<img src = "./image/Artificial Neuron.png", width="500" height="300">
+<img src = "./image/Artificial Neuron.png", width="500" height="200">
 </p>
 
  인공 신경망은 인공 뉴런들이 여러 층으로 구성되어 있는 특징으로부터 Multi-Layer Perceptron(MLP)라는 이름을 가지고 있으며, 각 층의 각각의 인공 뉴런이 다음 층의 각각의 인공 뉴런에 연결되어 있는 특징으로부터 Fully(Densely) Connected Neural Network(FCNN)이라는 이름도 가지고 있다.
 <p align="center">
-<img src = "./image/NN.png", width="500" height="300">
+<img src = "./image/NN.png", width="400" height="300">
 </p>
 
  인공 신경망은 크게 Input layer, Hidden (invisible) layer, Output layer으로 구성되어 있다. 위의 그림처럼 Hidden layer가 하나인 경우의 인공 신경망을 Shallow Neural Network라 하고, Hidden layer가 두 개 이상인 경우의 인공 신경망을 Deep Neural Network라 한다. 
