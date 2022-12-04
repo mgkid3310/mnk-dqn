@@ -7,7 +7,7 @@
 오하은, 서울 컴퓨터소프트웨어학부, haeunoh.tech@gmail.com     
 길준호, 에리카 전자공학부, gjh625com@naver.com 
 
-* [1. Proposal (Option A)](#1.-Proposal-(Option-A))    
+* [1. Proposal (Option A)](#1.-Proposal-(Option-A))
   * [1.1. Motivation: Why are you doing this?](#1.1.-Motivation:-Why-are-you-doing-this?)
   * [1.2. What do you want to see at the end?](#1.2.-What-do-you-want-to-see-at-the-end?)
 * [2. Theoretical Background](#2.-Theoretical-Background)
@@ -24,10 +24,10 @@
 
 ## 1. Proposal (Option A)
 
-1.1. Motivation: Why are you doing this?    
+__1.1. Motivation: Why are you doing this?__    
  2016년 3월 9일부터 15일까지 한국에서 알파고와 한국의 프로 기사인 이세돌 九 단이 바둑 대국을 진행했었다. 알파고는 알파벳의 구글 딥마인드에서 개발한 바둑 인공지능 프로그램인데, 이 대국에서 알파고는 이세돌 九 단을 4:1로 이기는 성과를 보였다. 이 일을 계기로 인공지능이 사회 보편적으로 알려지게 되었는데, 이러한 인공지능에 대한 관심에 힘입어 구체적으로 이런 인공지능 프로그램이 어떻게 작동하는지 그 원리를 이해해 보고 직접 해당 프로그램을 구현해 보고자 **DQN(Deep Q-Network)를 통한 mnk-game 파훼**라는 주제로 이번 프로젝트를 진행하였다.  
     
-1.2. What do you want to see at the end?   
+__1.2. What do you want to see at the end?__   
  mnk-game에서 k가 1, 2, 3인 경우에 확실한 파훼법이 존재하는데 k=4인 경우에는 그렇지 않으므로, 이 경우에 대해 DQN(Deep Q-Network)를 이용해 최선의 전략을 제공할 수 있는 모델을 완성하는 것이 이번 프로젝트의 목표이다.      
 
 ## 2. Theoretical Background
@@ -164,6 +164,5 @@
  * https://medium.com/towards-data-science/introduction-to-various-reinforcement-learning-algorithms-i-q-learning-sarsa-dqn-ddpg-72a5e0cb6287
  * https://sonsnotation.blogspot.com/2020/11/7-convolutional-neural-networkcnn.html
  * [기초부터 시작하는 강화학습/신경망 알고리즘](https://wikibook.co.kr/rlnn/)
-
 
 ## 7. Conclusion: Discussion    
