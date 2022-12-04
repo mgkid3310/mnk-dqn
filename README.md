@@ -136,6 +136,7 @@ __Ⅱ. Theoretical background__
 
 __Ⅲ. Datasets__     
  * m, n, k = 5, 5, 4
+ * agent가 관찰한 transition
         
 __Ⅳ. Methodology__
  * input layer: m*n
@@ -146,13 +147,12 @@ __Ⅳ. Methodology__
 __Ⅴ. Evaluation & Analysis__      
 
 __Ⅵ. Related Work__
- * https://ko.wikipedia.org/wiki/M,n,k-%EA%B2%8C%EC%9E%84
- * https://github.com/bruiseUneo/AI_X_DeepLearning
  * [Deep Learning: A Visual Approach(Andrew Glassner)](https://www.glassner.com/portfolio/deep-learning-a-visual-approach/)
  * https://spacebike.tistory.com/53?category=978529
  * https://towardsdatascience.com/the-concept-of-artificial-neurons-perceptrons-in-neural-networks-fab22249cbfc
  * https://rukshanpramoditha.medium.com/one-hidden-layer-shallow-neural-network-architecture-d45097f649e6
  * https://medium.com/towards-data-science/introduction-to-various-reinforcement-learning-algorithms-i-q-learning-sarsa-dqn-ddpg-72a5e0cb6287
  * https://sonsnotation.blogspot.com/2020/11/7-convolutional-neural-networkcnn.html
+ * [기초부터 시작하는 강화학습/신경망 알고리즘](https://wikibook.co.kr/rlnn/)
 
 __Ⅶ. Conclusion: Discussion__
