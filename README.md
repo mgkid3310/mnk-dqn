@@ -7,7 +7,7 @@
 오하은, 서울 컴퓨터소프트웨어학부, haeunoh.tech@gmail.com     
 길준호, 에리카 전자공학부, gjh625com@naver.com 
 
-* [1. Proposal (Option A)](#1-proposal-(option-a))
+* [1. Proposal (Option A)](#1-proposal-option-a)
   * [1.1. Motivation: Why are you doing this?](#1.1.-Motivation:-Why-are-you-doing-this?)
   * [1.2. What do you want to see at the end?](#1.2.-What-do-you-want-to-see-at-the-end?)
 * [2. Theoretical Background](#2.-Theoretical-Background)
