@@ -8,19 +8,19 @@
 길준호, 에리카 전자공학부, gjh625com@naver.com 
 
 * [1. Proposal (Option A)](#1-proposal-option-a)
-  * [1.1. Motivation: Why are you doing this?](#1.1-motivation:-why-are-you-doing-this?)
-  * [1.2. What do you want to see at the end?](#1.2-what-do-you-want-to-see-at-the-end?)
+  * [1.1. Motivation: Why are you doing this?](#11-motivation-why-are-you-doing-this)
+  * [1.2. What do you want to see at the end?](#12-what-do-you-want-to-see-at-the-end)
 * [2. Theoretical Background](#2-theoretical-background)
-  * [2.1. 강화학습 (Reinforcement Learning)](#2.1-강화학습-reinforcement-learning))
-  * [2.2. Q-러닝 (Q-Learning)](#2.2-q-러닝-q-learning)
-  * [2.3. 인공 신경망 (Neural Network)](#2.3-인공-신경망-neural-network)
-  * [2.4. CNN (Convolutional Neural Network)](#2.4-cnn-convolutional-neural-network)
-  * [2.5. DQN (Deep Q-Network)](#2.5-dqn-deep-q-network)
+  * [2.1. 강화학습 (Reinforcement Learning)](#21-강화학습-reinforcement-learning))
+  * [2.2. Q-러닝 (Q-Learning)](#22-q-러닝-q-learning)
+  * [2.3. 인공 신경망 (Neural Network)](#23-인공-신경망-neural-network)
+  * [2.4. CNN (Convolutional Neural Network)](#24-cnn-convolutional-neural-network)
+  * [2.5. DQN (Deep Q-Network)](#25-dqn-deep-q-network)
 * [3. Datasets](#3-datasets)
 * [4. Methodology](#4-methodology)
 * [5. Evaluation & Analysis](#5-evaluation-&-analysis)
 * [6. Related Work](#6-related-work)
-* [7. Conclusion: Discussion](#7-conclusion:-discussion)
+* [7. Conclusion: Discussion](#7-conclusion-discussion)
 
 ## 1. Proposal (Option A)
 
