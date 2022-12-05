@@ -18,7 +18,7 @@
   * [2.5. DQN (Deep Q-Network)](#25-dqn-deep-q-network)
 * [3. Datasets](#3-datasets)
 * [4. Methodology](#4-methodology)
-* [5. Evaluation & Analysis](#5-evaluation-&-analysis)
+* [5. Evaluation & Analysis](#5-evaluation-analysis)
 * [6. Related Work](#6-related-work)
 * [7. Conclusion: Discussion](#7-conclusion-discussion)
 
