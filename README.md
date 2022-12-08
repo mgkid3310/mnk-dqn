@@ -11,16 +11,16 @@
   * [1.1. Motivation: Why are you doing this?](#11-motivation-why-are-you-doing-this)
   * [1.2. What do you want to see at the end?](#12-what-do-you-want-to-see-at-the-end)
 * [2. Theoretical Background](#2-theoretical-background)
-  * [2.1. 강화학습 (Reinforcement Learning)](#21-강화학습-reinforcement-learning)
+  * [2.1. 강화학습 (Reinforcement Learning)](#21-강화학습-reinforcement-learning))
   * [2.2. Q-러닝 (Q-Learning)](#22-q-러닝-q-learning)
   * [2.3. 인공 신경망 (Neural Network)](#23-인공-신경망-neural-network)
   * [2.4. CNN (Convolutional Neural Network)](#24-cnn-convolutional-neural-network)
   * [2.5. DQN (Deep Q-Network)](#25-dqn-deep-q-network)
-* [3. Datasets](#3-datasets)
-* [4. Methodology](#4-methodology)
-* [5. Evaluation & Analysis](#5-evaluation-analysis)
-* [6. Related Work](#6-related-work)
-* [7. Conclusion: Discussion](#7-conclusion-discussion)
+* [3. mnk-game](#3-mnk-game)
+  * [3.1. Environmnet](#31-environmnet)
+  * [3.2. DQN](#32-dqn)
+* [4. Who did what](#4-who-did-what)
+* [5. Related Work](#5-related-work)
 
 ## 1. Proposal (Option A)
 
@@ -144,19 +144,100 @@
 </p> 
 
  DQN을 훈련하기 위해서 다음의 두 가지 기술들이 또한 필요하다. 첫 번째는 experience replay이다. 전형적인 강화학습 구성에서 훈련 표본들은 매우 상관되어 있고, data 효율이 낮기 때문에, 신경망이 훈련 표본들을 수렴하기 어렵다. 표본 분배 문제를 해결하기 위해서 experience replay memory를 만들고 experience를 저장한 후 랜덤하게 뽑아서 학습한다. 이를 통해 덜 상관되어 있고 고르게 분포된 data로 학습할 수 있게 된다. 두 번째는 서로 다른 목표 network를 사용하는 것이다. 목표 Q Network는 추정 값과 같은 구조를 가지고 있다. 위의 pseudo code를 보면, 매번의 C 단계에서 목표 network는 다른 것으로 변경된다. 따라서 DQN은 변동이 덜 심해지고, 보다 안정적인 훈련을 할 수 있게 된다.
- 
-## 3. Datasets
- * m, n, k = 5, 5, 4
- * agent가 관찰한 transition
-        
-## 4. Methodology
- * input layer: m*n
- * dense 2*m*n relu
- * output m*n linear
+## 3. mnk-game
+### 3.1. Environmnet
+먼저 mnk-game 환경을 정의해보자.
+```
+class Environment():
+  def __init__(self):
+      self.board_a = np.zeros(25)
+      self.done = False
+      self.reward = 0
+      self.winner = 0
+      self.print = False
+```
+보드는 0으로 초기화된 25개의 배열로 준비하자.
+done = True면 게임을 종료한다.
 
-## 5. Evaluation & Analysis
+게임을 진행하는 두 명의 플레이어가 필요하며, 먼저 공격하는 플레이어를 p1로 정의하고, 나중에 공격하는 플레이어를 p2로 정의하자. 
+```
+  def move(self, p1, p2, player):
+    if player == 1:
+        pos = p1.select_action(env)
+    else:
+        pos = p2.select_action(env)
+    
+    self.board_a[pos] = player # 보드에 플레이어의 선택을 표시
+    if self.print:
+        print(player)
+        self.print_board()
+    self.end_check(player) # 게임이 종료상태인지 아닌지를 판단
+    
+    return  self.reward, self.done
+```
+각 플레이어가 선택한 행동을 표시 하고 게임 상태(진행 또는 종료)를 판단한다.
+p1 = 1, p2 = -1로 정의했으며 각 플레이어는 행동을 선택하는 select_action 메서드를 가진다.
 
-## 6. Related Work
+```
+  def get_action(self):
+    observation = []
+    for i in range(25):
+        if self.board_a[i] == 0:
+            observation.append(i)
+    return observation
+```
+현재 보드 상태에서 가능한 행동(둘 수 있는 장소)을 탐색하고 리스트로 반환한다.
+  
+```
+  def end_check(self,player):
+    end_condition = (
+                        (0,1,2,3),(1,2,3,4),(5,6,7,8),(6,7,8,9),(10,11,12,13),(11,12,13,14),(15,16,17,18),(16,17,18,19),(20,21,22,23),(21,22,23,24), # 가로
+                        (0,6,12,17),(6,12,17,22),(1,7,13,19),(5,11,17,23), # 왼쪽 위 -> 오른쪽 아래 대각선
+                        (4,8,12,16),(8,12,16,20),(3,7,11,15),(9,13,17,21), # 오른쪽 위 -> 왼쪽 아래 대각선
+                        (0,5,10,15),(5,10,15,20),(1,6,11,16),(6,11,16,21),(2,7,12,17),(7,12,17,22),(3,8,13,18),(8,13,18,23),(4,9,14,19),(9,14,19,24) # 세로
+                    )
+    for line in end_condition:
+        if self.board_a[line[0]] == self.board_a[line[1]] \
+            and self.board_a[line[1]] == self.board_a[line[2]] \
+            and self.board_a[line[2]] == self.board_a[line[3]] \
+            and self.board_a[line[0]] != 0:
+            # 종료됐다면 누가 이겼는지 표시
+            self.done = True
+            self.reward = player
+            return
+    # 비긴 상태는 더는 보드에 빈 공간이 없을때
+    observation = self.get_action()
+    if (len(observation)) == 0:
+        self.done = True
+        self.reward = 0            
+    return
+```
+게임이 종료(승패 또는 비김)됐는지 판단한다.
+승패 조건은 가로, 세로, 대각선 이 -1 이나 1 로 동일할 때이다.
+```
+  def print_board(self):
+    print("+----+----+----+----+----+")
+    for i in range(5):
+        for j in range(5):
+            if self.board_a[5*i+j] == 1:
+                print("|  O",end=" ")
+            elif self.board_a[5*i+j] == -1:
+                print("|  X",end=" ")
+            else:
+                print("|   ",end=" ")
+        print("|")
+        print("+----+----+----+----+----+")
+```
+p1 = O, p2 = X로 현재 보드의 상태를 표시한다.
+### 3.2. DQN
+
+## 4. Who did what
+- 김기범:  
+- 박민기: 
+- 오하은: 
+- 길준호: 
+
+## 5. Related Work
  * [Deep Learning: A Visual Approach(Andrew Glassner)](https://www.glassner.com/portfolio/deep-learning-a-visual-approach/)
  * https://spacebike.tistory.com/53?category=978529
  * https://towardsdatascience.com/the-concept-of-artificial-neurons-perceptrons-in-neural-networks-fab22249cbfc
@@ -164,5 +245,3 @@
  * https://medium.com/towards-data-science/introduction-to-various-reinforcement-learning-algorithms-i-q-learning-sarsa-dqn-ddpg-72a5e0cb6287
  * https://sonsnotation.blogspot.com/2020/11/7-convolutional-neural-networkcnn.html
  * [기초부터 시작하는 강화학습/신경망 알고리즘](https://wikibook.co.kr/rlnn/)
-
-## 7. Conclusion: Discussion    
