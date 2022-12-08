@@ -11,7 +11,7 @@
   * [1.1. Motivation: Why are you doing this?](#11-motivation-why-are-you-doing-this)
   * [1.2. What do you want to see at the end?](#12-what-do-you-want-to-see-at-the-end)
 * [2. Theoretical Background](#2-theoretical-background)
-  * [2.1. 강화학습 (Reinforcement Learning)](#21-강화학습-reinforcement-learning))
+  * [2.1. 강화학습 (Reinforcement Learning)](#21-강화학습-reinforcement-learning)
   * [2.2. Q-러닝 (Q-Learning)](#22-q-러닝-q-learning)
   * [2.3. 인공 신경망 (Neural Network)](#23-인공-신경망-neural-network)
   * [2.4. CNN (Convolutional Neural Network)](#24-cnn-convolutional-neural-network)
