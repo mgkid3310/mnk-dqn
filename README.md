@@ -148,7 +148,7 @@
 ## 3. mnk-game
 ### 3.1. Environmnet
 먼저 mnk-game 환경을 정의해보자.
-```
+```python
 class Environment():
   def __init__(self):
       self.board_a = np.zeros(25)
@@ -161,7 +161,7 @@ class Environment():
 done = True면 게임을 종료한다.
 
 게임을 진행하는 두 명의 플레이어가 필요하며, 먼저 공격하는 플레이어를 p1로 정의하고, 나중에 공격하는 플레이어를 p2로 정의하자. 
-```
+```python
   def move(self, p1, p2, player):
     if player == 1:
         pos = p1.select_action(env)
@@ -179,7 +179,7 @@ done = True면 게임을 종료한다.
 각 플레이어가 선택한 행동을 표시 하고 게임 상태(진행 또는 종료)를 판단한다.
 p1 = 1, p2 = -1로 정의했으며 각 플레이어는 행동을 선택하는 select_action 메서드를 가진다.
 
-```
+```python
   def get_action(self):
     observation = []
     for i in range(25):
@@ -189,7 +189,7 @@ p1 = 1, p2 = -1로 정의했으며 각 플레이어는 행동을 선택하는 se
 ```
 현재 보드 상태에서 가능한 행동(둘 수 있는 장소)을 탐색하고 리스트로 반환한다.
   
-```
+```python
   def end_check(self,player):
     end_condition = (
                         (0,1,2,3),(1,2,3,4),(5,6,7,8),(6,7,8,9),(10,11,12,13),(11,12,13,14),(15,16,17,18),(16,17,18,19),(20,21,22,23),(21,22,23,24), # 가로
@@ -215,7 +215,8 @@ p1 = 1, p2 = -1로 정의했으며 각 플레이어는 행동을 선택하는 se
 ```
 게임이 종료(승패 또는 비김)됐는지 판단한다.
 승패 조건은 가로, 세로, 대각선 이 -1 이나 1 로 동일할 때이다.
-```
+
+```python
   def print_board(self):
     print("+----+----+----+----+----+")
     for i in range(5):
