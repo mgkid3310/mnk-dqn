@@ -68,7 +68,8 @@ target_net = DQN(m, n, k).to(device)
 target_net.load_state_dict(policy_net.state_dict())
 target_net.eval()
 
-optimizer = optim.RMSprop(policy_net.parameters())
+optimizer = optim.Adam(policy_net.parameters())
+loss_fn = nn.MSELoss(reduction = 'sum')
 memory = ReplayMemory(10000)
 
 steps_done = 0
@@ -105,13 +106,13 @@ def optimize_model():
     max_next_q = policy_net(next_states).detach().max(1)[0]
     expected_q = rewards + (GAMMA * max_next_q)
 
-    loss = F.mse_loss(current_q.squeeze(), expected_q)
+    loss = loss_fn(current_q.squeeze(), expected_q)
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
 
 #%%
-num_episodes = 1000
+num_episodes = 10000
 for i_episode in range(num_episodes):
     print(f'{i_episode}/{num_episodes}')
     env.reset()
