@@ -1,3 +1,4 @@
+#%%
 import numpy as np
 from tqdm import tqdm
 
@@ -13,7 +14,7 @@ p1_score = 0
 p2_score = 0
 draw_score = 0
 
-max_learn = 100
+max_learn = 500
 
 train_history = []
 
@@ -81,3 +82,24 @@ print("p1 = {} p2 = {} draw = {}".format(p1_score,p2_score,draw_score))
 print("end learn")
 
 p1_DQN.save_network("p1_DQN")
+
+#%%
+import matplotlib.pyplot as plt
+
+data_array = np.array(train_history)
+train_iter = data_array[:,0]
+p1_scores = data_array[:,1]
+p2_scores = data_array[:,2]
+draw_scores = data_array[:,3]
+num_games = p1_scores + p2_scores + draw_scores
+
+plt.figure(figsize=(10, 5))
+plt.plot(train_iter, 100 * p1_scores / num_games, label="DQN")
+plt.plot(train_iter, 100 * p2_scores / num_games, label="Q-Table")
+plt.plot(train_iter, 100 * draw_scores / num_games, label="Draw")
+plt.xlim(10, max_learn)
+plt.ylim(0, 100)
+plt.xlabel("Train Iteration")
+plt.ylabel("Result Ratio (%)")
+plt.legend()
+plt.show()
