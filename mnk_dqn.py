@@ -65,6 +65,10 @@ class DQN_player():
                 pass
         return d_state
 
+    def select_action(self, env):
+        action = self.policy(env)
+        return action
+
     def policy(self, env):
         available_state = env.get_action() # 행동 가능한 상태를 저장
 
