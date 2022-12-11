@@ -409,9 +409,9 @@ DQN 모델의 성능은 Neural Network의 구조에 크게 영향을 받는다. 
 - 1 Fully Connected Layer (Linear Layer)
 - 2 Fully Connected Layers
 - 3 Fully Connected Layers
-- 1 2D Convulusion Layer and 1 Fully Connected Layers
-- 2 2D Convulusion Layers and 1 Fully Connected Layers
-- 3 2D Convulusion Layers and 1 Fully Connected Layers
+- 1 2D Convulusion Layer and 1 Fully Connected Layer
+- 2 2D Convulusion Layers and 1 Fully Connected Layer
+- 3 2D Convulusion Layers and 1 Fully Connected Layer
 - 3 2D Convulusion Layers and 3 Fully Connected Layers
 
 이들 모델들을 훈련하면서 얻어진 Train Iteration에 따른 승률 변화를 그래프로 나타내면 아래와 같다.
@@ -430,6 +430,10 @@ DQN 모델의 성능은 Neural Network의 구조에 크게 영향을 받는다. 
 - DQN (1 FCN) Averate Winrate: 61.30%
 - DQN (3 FCNs) Averate Winrate: 58.38%
 - DQN (2 Conv2Ds + 1 FCN) Averate Winrate: 56.77%
+
+훈련 결과를 보면 동일한 Q-Table 모델을 상대로 2D Convulusion Layer를 이용한 경우가 일반적으로 높은 승률을 보여 훈련이 보다 잘 되었다고 판단할 수 있다. 다만, 2개의 Conv2D 레이어를 사용한 경우의 승률이 가장 낮은 결과가 나와 Conv2D 레이어를 사용한다고 하여 훈련이 무조건적으로 잘 되는것은 아니라고 보여진다. 또한 특기할 만한 사실은 1개, 3개의 Conv2D 레이어를 사용한 경우의 승률 차이와 1개, 2개의 FCN 레이어를 사용한 경우의 승률 차이가 각각 약 1% 정도로 오차범위 내에서 관찰되었다는 점이다. 이는 모델의 구조보다 매 훈련마다 발생하는 우연성이 더 큰 영향을 미친 것으로 해석할 수 있어 추가적인 조사가 필요하다고 생각된다.
+
+본 탐구에서는 각 모델에 대하여 300 Iteration의 훈련만 수행하였지만 보다 정확한 결과를 구하기 위해서는 Iteration 수를 늘려야 할 것으로 생각된다. 또한 각 레이어의 Feature 수에 대하여는 튜닝을 하지 않았기 때문에 Feature 수 또한 다양한 숫자로 바꾸어 가며 훈련을 수행해보는 것이 좋을 것으로 보인다.
 
 ## 4. Who did what
 - 김기범: 
