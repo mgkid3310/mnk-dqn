@@ -177,8 +177,8 @@ done = True면 게임을 종료한다.
     
     return  self.reward, self.done
 ```
-각 플레이어가 선택한 행동을 표시 하고 게임 상태(진행 또는 종료)를 판단한다.
 p1 = 1, p2 = -1로 정의했으며 각 플레이어는 행동을 선택하는 select_action 메서드를 가진다.
+각 플레이어가 선택한 행동을 표시 하고 게임 상태(진행 또는 종료)를 판단한다.
 
 ```python
   def get_action(self):
@@ -266,6 +266,7 @@ class Human_player():
       if action in available_action: return action # 입력받은 행동이 가능한 행동이면 반복문을 탈출
       else: print("You selected wrong action") # 아니면 행동 입력을 반복
 ```
+사람이 말을 둘 수 있는 곳을 표시해주며 키보드로 입력을 받는다.
 
 p1 player를 DQN으로 p2 player를 사람으로 설정하고 진행해보자.
 
