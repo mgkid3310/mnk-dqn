@@ -1,5 +1,8 @@
 #%%
 import numpy as np
+from keras.models import Sequential
+from keras.optimizers import SGD
+from keras.layers import Dense, Flatten, Conv2D
 from tqdm import tqdm
 
 import mnk_env, mnk_dqn, mnk_qt
@@ -8,14 +11,23 @@ np.random.seed(0)
 
 p1_DQN = mnk_dqn.DQN_player()
 p2 = mnk_qt.Q_learning_player()
-p2.epsilon = 0.5
+
+title = '3 Conv2Ds + 3 FCNs'
+p1_DQN.model = Sequential()
+p1_DQN.model.add(Conv2D(16, (5, 5), padding='same', activation='relu', input_shape=(5,5,4)))
+p1_DQN.model.add(Conv2D(32, (5, 5), padding='same', activation='relu'))
+p1_DQN.model.add(Conv2D(64, (5, 5), padding='same', activation='relu'))
+p1_DQN.model.add(Flatten())
+p1_DQN.model.add(Dense(256, activation='tanh'))
+p1_DQN.model.add(Dense(128, activation='tanh'))
+p1_DQN.model.add(Dense(64, activation='tanh'))
+p1_DQN.model.compile(optimizer = SGD(learning_rate=0.01), loss = 'mean_squared_error', metrics=['mse'])
 
 p1_score = 0
 p2_score = 0
 draw_score = 0
 
-max_learn = 500
-
+max_learn = 300
 train_history = []
 
 for j in tqdm(range(max_learn)):
@@ -78,10 +90,10 @@ for j in tqdm(range(max_learn)):
 
     train_history.append([j, p1_score, p2_score, draw_score])
 
-print("p1 = {} p2 = {} draw = {}".format(p1_score,p2_score,draw_score))
-print("end learn")
+# print("p1 = {} p2 = {} draw = {}".format(p1_score,p2_score,draw_score))
+# print("end learn")
 
-p1_DQN.save_network("p1_DQN")
+# p1_DQN.save_network("p1_DQN")
 
 #%%
 import matplotlib.pyplot as plt
@@ -94,12 +106,16 @@ draw_scores = data_array[:,3]
 num_games = p1_scores + p2_scores + draw_scores
 
 plt.figure(figsize=(10, 5))
+plt.title(title)
 plt.plot(train_iter, 100 * p1_scores / num_games, label="DQN")
 plt.plot(train_iter, 100 * p2_scores / num_games, label="Q-Table")
 plt.plot(train_iter, 100 * draw_scores / num_games, label="Draw")
 plt.xlim(10, max_learn)
 plt.ylim(0, 100)
 plt.xlabel("Train Iteration")
-plt.ylabel("Result Ratio (%)")
+plt.ylabel("Win Ratio (%)")
 plt.legend()
 plt.show()
+
+dqn_win_average = np.mean(100 * (p1_scores / num_games)[-101:-1])
+print(f'DQN ({title}) Averate Winrate: {dqn_win_average:.2f}%')

@@ -20,6 +20,7 @@
   * [3.1. Environmnet](#31-environmnet)
   * [3.2. DQN](#32-dqn)
   * [3.3. Play mnk-game with DQN](#33-play-mnk-game-with-dqn)
+  * [3.4. Neural Network Analysis](#34-neural-network-analysis)
 * [4. Who did what](#4-who-did-what)
 * [5. Related Work](#5-related-work)
 
@@ -402,6 +403,34 @@ Select action(human) : 7
 +----+----+----+----+----+
 ```
 이와 같이 DQN와 mnk-game을 진행할 수 있다.
+
+### 3.4. Neural Network Analysis
+DQN 모델의 성능은 Neural Network의 구조에 크게 영향을 받는다. 이를 분석하기 위해 다양한 Neural Network 구조를 사용해보았다. 사용하여 본 Neural Network 구조는 다음과 같다.
+- 1 Fully Connected Layer (Linear Layer)
+- 2 Fully Connected Layers
+- 3 Fully Connected Layers
+- 1 2D Convulusion Layer and 1 Fully Connected Layers
+- 2 2D Convulusion Layers and 1 Fully Connected Layers
+- 3 2D Convulusion Layers and 1 Fully Connected Layers
+- 3 2D Convulusion Layers and 3 Fully Connected Layers
+
+이들 모델들을 훈련하면서 얻어진 Train Iteration에 따른 승률 변화를 그래프로 나타내면 아래와 같다.
+| Fully Connected Layers | 2D Convulusion Layers |
+-------------------------|-----------------------
+![](./image/1fcn.png)|![](./image/1cnv1fcn.png)|
+|![](./image/2fcn.png)|![](./image/2cnv1fcn.png)|
+|![](./image/3fcn.png)|![](./image/3cnv1fcn.png)|
+||![](./image/3cnv3fcn.png)|
+
+위 결과들을 DQN 모델의 마지막 100 Iteration 동안의 평균 승률 순서로 나열하면 아래와 같다.
+- DQN (3 Conv2Ds + 3 FCNs) Averate Winrate: 67.18%
+- DQN (3 Conv2Ds + 1 FCN) Averate Winrate: 65.90%
+- DQN (1 Conv2D + 1 FCN) Averate Winrate: 64.67%
+- DQN (2 FCNs) Averate Winrate: 62.38%
+- DQN (1 FCN) Averate Winrate: 61.30%
+- DQN (3 FCNs) Averate Winrate: 58.38%
+- DQN (2 Conv2Ds + 1 FCN) Averate Winrate: 56.77%
+
 ## 4. Who did what
 - 김기범: 
 - 박민기: 

@@ -5,7 +5,7 @@ class Q_learning_player():
     def __init__(self):
         self.name = "Q_player"
         self.qtable = {} # Q-table을 딕셔너리로 정의
-        self.epsilon = 1 # e-greedy 계수
+        self.epsilon = 0.5 # e-greedy 계수
         self.learning_rate = 0.1 # 학습률
         self.gamma=0.9
 
