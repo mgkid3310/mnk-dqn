@@ -21,8 +21,9 @@
   * [3.2. DQN](#32-dqn)
   * [3.3. Play mnk-game with DQN](#33-play-mnk-game-with-dqn)
   * [3.4. Neural Network Analysis](#34-neural-network-analysis)
-* [4. Who did what](#4-who-did-what)
-* [5. Related Work](#5-related-work)
+* [4. Presentation Video](#4-presentation-video)
+* [5. Who did what](#4-who-did-what)
+* [6. Related Work](#5-related-work)
 
 ## 1. Proposal (Option A)
 
@@ -435,13 +436,16 @@ DQN 모델의 성능은 Neural Network의 구조에 크게 영향을 받는다. 
 
 본 탐구에서는 각 모델에 대하여 300 Iteration의 훈련만 수행하였지만 보다 정확한 결과를 구하기 위해서는 Iteration 수를 늘려야 할 것으로 생각된다. 또한 각 레이어의 Feature 수에 대하여는 튜닝을 하지 않았기 때문에 Feature 수 또한 다양한 숫자로 바꾸어 가며 훈련을 수행해보는 것이 좋을 것으로 보인다.
 
-## 4. Who did what
+## 4. Presentation Video
+[Youtube 동영상 링](https://youtu.be/nEomm98zIvQ)
+
+## 5. Who did what
 - 김기범: 
 - 박민기: DQN Layer 구성 및 훈련, 발표 영상 인코딩
 - 오하은: 
 - 길준호: 
 
-## 5. Related Work
+## 6. Related Work
  * [Deep Learning: A Visual Approach(Andrew Glassner)](https://www.glassner.com/portfolio/deep-learning-a-visual-approach/)
  * https://spacebike.tistory.com/53?category=978529
  * https://towardsdatascience.com/the-concept-of-artificial-neurons-perceptrons-in-neural-networks-fab22249cbfc
