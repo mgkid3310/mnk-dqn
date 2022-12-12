@@ -437,7 +437,7 @@ DQN 모델의 성능은 Neural Network의 구조에 크게 영향을 받는다. 
 본 탐구에서는 각 모델에 대하여 300 Iteration의 훈련만 수행하였지만 보다 정확한 결과를 구하기 위해서는 Iteration 수를 늘려야 할 것으로 생각된다. 또한 각 레이어의 Feature 수에 대하여는 튜닝을 하지 않았기 때문에 Feature 수 또한 다양한 숫자로 바꾸어 가며 훈련을 수행해보는 것이 좋을 것으로 보인다.
 
 ## 4. Presentation Video
-[Youtube 동영상 링](https://youtu.be/nEomm98zIvQ)
+[Youtube 동영상 링크](https://youtu.be/nEomm98zIvQ)
 
 ## 5. Who did what
 - 김기범: 
