@@ -443,7 +443,7 @@ DQN 모델의 성능은 Neural Network의 구조에 크게 영향을 받는다. 
 - 김기범: 인공 신경망, CNN, DQN 이론 내용 작성, 블로그 편집
 - 박민기: DQN Layer 구성 및 훈련, 발표 영상 인코딩
 - 오하은: mnk-game 환경 구성, 훈련시킨 DQN과의 게임 진행 구현, 블로그 
-- 길준호: 
+- 길준호: 강화학습, Q-learning 이론 내용 작성
 
 ## 6. Related Work
  * [Deep Learning: A Visual Approach(Andrew Glassner)](https://www.glassner.com/portfolio/deep-learning-a-visual-approach/)
